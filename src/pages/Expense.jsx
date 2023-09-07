@@ -123,7 +123,7 @@ function Expense({ isDarkTheme }) {
     <div className={`${isDarkTheme ? " bg-slate-300 " : "text-slate-100 bg-slate-800"} text-center sm1:w-[17.5rem] sm2:w-[21.3rem] sm3:w-[23.5rem] md1:w-[27rem] md2:w-[35rem] md1:p-4 sm1:my-16 sm1:p-2 p-4 rounded-md mx-auto my-24`}>
       <h1 className=" sm1:text-2xl sm3:text-4xl">Expense Tracker</h1>
       <h2 className="sm1:text-xl font-light sm3:text-2xl py-2">Your Balance</h2>
-      <h3 className="sm1:text-md sm3:text-lg">{state.balance < 0 ? `-$${Math.abs(state.balance)}.00` : `${state.balance}.00`}</h3>
+      <h3 className="sm1:text-md sm3:text-lg">{state.balance < 0 ? `-$${Math.abs(state.balance)}.00` : `$${state.balance}.00`}</h3>
 
       <div className={`flex my-4 py-2 ${isDarkTheme ? "bg-slate-200" : "bg-slate-900"} shadow-md mx-auto rounded-md sm1:w-11/12 sm2:w-5/6 justify-center sm1:gap-8 sm2:gap-16`}>
         <div>
@@ -206,7 +206,7 @@ function TransactionForm({ isDarkTheme, state, dispatch, handleAddTransaction, t
           onChange={(e) => dispatch({ type: ACTIONS.SET_AMOUNT, payload: e.target.value })}
         />
         <select
-          className="border m-4 rounded-md px-4 py-2 text-slate-900"
+          className="border m-4 rounded-md px-4 py-2 bg-white text-slate-900"
           // eslint-disable-next-line react/prop-types
           value={state.transType}
           onChange={(e) => dispatch({ type: ACTIONS.SET_TRANSTYPE, payload: e.target.value })}>
