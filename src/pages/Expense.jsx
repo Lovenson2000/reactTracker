@@ -206,7 +206,7 @@ function TransactionForm({ isDarkTheme, state, dispatch, handleAddTransaction, t
           onChange={(e) => dispatch({ type: ACTIONS.SET_AMOUNT, payload: e.target.value })}
         />
         <select
-          className="border m-4 rounded-md px-4 py-2 bg-white text-slate-900"
+          className="border m-4 outline-none rounded-md px-4 py-2 bg-white text-slate-900"
           // eslint-disable-next-line react/prop-types
           value={state.transType}
           onChange={(e) => dispatch({ type: ACTIONS.SET_TRANSTYPE, payload: e.target.value })}>
