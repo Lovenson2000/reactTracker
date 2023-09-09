@@ -79,11 +79,15 @@ function reducer(state, action) {
       break;
 
     case ACTIONS.REMOVE_TRANSACTION: //case for removing transaction
-      return {
+    
+    return {
         ...state,
         transactions: state.transactions.filter((transaction) =>
           transaction.id !== action.payload.id
         ),
+          
+        income: state.income - (action.payload.type === "income" ? action.payload.amount : 0),
+        expense: state.expense - (action.payload.type === "expense" ?  action.payload.amount: 0),
         balance: state.balance + (action.payload.type === "income" ? - action.payload.amount : action.payload.amount),
       }
 
