@@ -21,8 +21,8 @@ function App() {
         <Routes>
           <Route path="/expense" element={<Expense isDarkTheme={isDarkTheme} />} />
           <Route path="/dailyquote" element={<DailyQuote isDarkTheme={isDarkTheme} />} />
-          <Route path="/gym" element={<Gym />} />
-          <Route path="/taskmanager" element={<TaskManager />} />
+          <Route path="/gym" element={<Gym isDarkTheme={isDarkTheme} />} />
+          <Route path="/taskmanager" element={<TaskManager isDarkTheme={isDarkTheme} />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -2,6 +2,7 @@
 import { useState } from 'react';
 
 export default function DailyQuote({isDarkTheme}) {
+  
   let customQuote = "A man should not have more than one priority not have more than one priority at once.";
   let customAuthor = "Blatter";
 
@@ -24,7 +25,7 @@ export default function DailyQuote({isDarkTheme}) {
     }
 
   return (
-    <div className={`flex flex-col justify-center items-center ${isDarkTheme ? "bg-slate-300" : "bg-slate-800 text-slate-100"} rounded-sm p-8 sm1:p-2 mx-auto sm1:w-11/12 sm2:w-11/12 md1:w-[34rem] sm1:min-h-[20rem] text-4xl my-24`}>
+    <div className={`flex flex-col justify-center items-center ${isDarkTheme ? "bg-slate-300" : "bg-slate-800 text-slate-100"} rounded-md p-8 sm1:p-2 mx-auto sm1:w-11/12 sm2:w-11/12 md1:w-[34rem] sm1:min-h-[20rem] text-4xl my-24`}>
       <p className='text-2xl sm1:text-center sm1:p-2 pt-4 text-justify font-normal'>
        
         " {quote} "
