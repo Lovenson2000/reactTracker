@@ -4,7 +4,6 @@ import Header from "./components/Header";
 import DailyQuote from "./pages/DailyQuote";
 import Expense from "./pages/Expense";
 import Gym from "./pages/Gym";
-import TaskManager from "./pages/TaskManager";
 
 function App() {
 
@@ -22,7 +21,6 @@ function App() {
           <Route path="/expense" element={<Expense isDarkTheme={isDarkTheme} />} />
           <Route path="/dailyquote" element={<DailyQuote isDarkTheme={isDarkTheme} />} />
           <Route path="/gym" element={<Gym isDarkTheme={isDarkTheme} />} />
-          <Route path="/taskmanager" element={<TaskManager isDarkTheme={isDarkTheme} />} />
         </Routes>
       </BrowserRouter>
     </div>

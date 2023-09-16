@@ -9,7 +9,6 @@ function Header({changeTheme}) {
         <NavLink className="px-4 sm1:px-2 sm3:pr-4" to="/expense">Expense</NavLink>
         <NavLink className="pr-8 sm1:px-2 sm3:pr-4" to="/dailyquote">DailyQuote</NavLink>
         <NavLink className="pr-8 sm1:px-2 sm3:pr-4" to="/gym">Gym</NavLink>
-        <NavLink className="pr-8 sm1:px-2 sm3:pr-4" to="/taskmanager">Tasks</NavLink>
       </ul>
       <img className='rotate-180 w-[2.3rem] sm1:w-[1.5rem] sm2:w-[1.8rem] sm3:w-[2rem] cursor-pointer'
       src={moon}
