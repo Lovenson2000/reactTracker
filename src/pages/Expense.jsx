@@ -227,7 +227,3 @@ function TransactionForm({ isDarkTheme, state, dispatch, handleAddTransaction, t
     </>
   );
 }
-
-
-
-
