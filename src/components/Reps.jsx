@@ -7,7 +7,7 @@ export default function Reps({state, dispatch, ACTIONS}) {
             onChange={(e) => dispatch({ type: ACTIONS.SET_NUMBEROFREPS, payload: e.target.value })}
         >
             <option value="" disabled defaultValue>Number of reps</option>
-            {Array.from({ length: 20 }, (_, i) => i + 1).map(rep =>
+            {Array.from({ length: 50 }, (_, i) => i + 1).map(rep =>
                 <option value={rep} key={rep}>{rep}</option>
             )}
 

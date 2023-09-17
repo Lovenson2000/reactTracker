@@ -104,7 +104,7 @@ function Gym({ isDarkTheme }) {
 
   return (
     <>
-      <div className={`${isDarkTheme ? "bg-slate-300 text-slate-900" : "bg-slate-800 text-slate-300"} rounded-md sm1:w-[18.5rem] sm2:w-[21.7rem] sm3:w-[24rem] md2:w-[40rem] mx-auto sm1:p-2 sm3:p-4 md2:p-8 text-center text-4xl my-24`} >
+      <div className={`${isDarkTheme ? "bg-slate-300 text-slate-900" : "bg-slate-800 text-slate-300"} rounded-md sm1:w-[18.5rem] sm2:w-[21.7rem] sm3:w-[24rem] md2:w-[40rem] mx-auto sm1:p-2 sm3:p-4 md2:p-8 text-center text-4xl my-16`} >
         <h1 className="sm1:text-[1.5rem] sm2:text-[2rem] md2:text-4xl">Enter your workout details</h1>
         <form className={`sm1:w-[17rem] sm2:w-[20rem] sm3:w-[21.5rem] ${isDarkTheme ? "bg-slate-200" : "bg-slate-900"} flex flex-col text-lg bg-slate-100 gap-8 text-slate-800 rounded-md mx-auto my-4 py-6 shadow-lg`}>
           <TargetMuscle state={state} dispatch={dispatch} ACTIONS={ACTIONS} />
