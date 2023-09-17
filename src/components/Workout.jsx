@@ -5,7 +5,7 @@ function Workout({ state, index, dispatch, ACTIONS }) {
             <p>You are targeting your <strong>{state.muscle}</strong> with <strong>{state.name} </strong>
                 You have <strong>{state.sets} </strong>sets of <strong>{state.reps}</strong> reps Total reps = {state.sets * state.reps}</p>
             <span
-                className="absolute right-3 cursor-pointer bottom-0 font-bold text-indigo-500"
+                className="absolute right-3 cursor-pointer bottom-0 m-2 font-bold text-indigo-500"
                 onClick={() => dispatch({ type: ACTIONS.REMOVE_WORKOUTSESSION, payload: state })}
             >
                 X
