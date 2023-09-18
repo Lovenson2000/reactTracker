@@ -1,4 +1,6 @@
 import { useState, useReducer } from "react";
+import { History } from "../components/History";
+import TransactionForm from "../components/TransactionForm";
 
 const ACTIONS = {
   TOGGLE_ADDTRANSACTION: "toggleAddTransaction",
@@ -151,6 +153,7 @@ function Expense({ isDarkTheme }) {
                 transaction={transaction}
                 key={transaction.id}
                 dispatch={dispatch}
+                ACTIONS={ACTIONS}
               />
             )}
           </ul>
@@ -163,67 +166,11 @@ function Expense({ isDarkTheme }) {
         {state.addTransaction ? "Close Transaction" : "Add Transaction"}
       </button>
 
-      {state.addTransaction && <TransactionForm state={state} isDarkTheme={isDarkTheme} dispatch={dispatch} handleAddTransaction={handleAddTransaction} />}
+      {state.addTransaction && <TransactionForm state={state} isDarkTheme={isDarkTheme} dispatch={dispatch} handleAddTransaction={handleAddTransaction} ACTIONS={ACTIONS} />}
 
     </div>
   )
 }
 export default Expense;
 
-//History Component to display transactions
-function History({ transaction, dispatch }) {
-  return (
-    <li className={`my-1 p-1 shadow-sm border-r-4 ${transaction.type === "income" ? "border-green-400" : "border-red-400"} relative`}>
-      <div className="flex justify-between py-2 px-4">
-        <h3 className="font-light sm3:text-xl">{transaction.name}</h3>
-        <span className="font-extralight">${transaction.amount}.00</span>
-      </div>
-      <span
-        className="absolute cursor-pointer text-xl right-0.5 bottom-0"
-        onClick={() => dispatch({ type: ACTIONS.REMOVE_TRANSACTION, payload: transaction })}
-      >
-        &times;
-      </span>
-    </li>
-  );
-}
 
-// eslint-disable-next-line react/prop-types
-function TransactionForm({ isDarkTheme, state, dispatch, handleAddTransaction, transactions }) {
-  return (
-    <>
-      <form className={`text-slate-800 ${isDarkTheme ? " bg-slate-100 " : "bg-slate-900"} flex shadow-md flex-col p-2 rounded-md sm1:w-11/12 sm2:w-5/6 mx-auto`}>
-        <input
-          className="border m-4 outline-none rounded-md px-4 py-2 focus-visible:border-b-slate-900 placeholder:text-slate-900"
-          type="text"
-          // eslint-disable-next-line react/prop-types
-          value={state.transName}
-          placeholder="Transaction name..."
-          onChange={(e) => dispatch({ type: ACTIONS.SET_TRANSNAME, payload: e.target.value })}
-        />
-
-        <input
-          className="border m-4 outline-none rounded-md px-4 py-2 focus-visible:border-b-slate-900 placeholder:text-slate-900"
-          type="number"
-          // eslint-disable-next-line react/prop-types
-          value={state.amount}
-          onChange={(e) => dispatch({ type: ACTIONS.SET_AMOUNT, payload: e.target.value })}
-        />
-        <select
-          className="border m-4 outline-none rounded-md px-4 py-2 bg-white text-slate-900"
-          // eslint-disable-next-line react/prop-types
-          value={state.transType}
-          onChange={(e) => dispatch({ type: ACTIONS.SET_TRANSTYPE, payload: e.target.value })}>
-          <option value="expense">expense</option>
-          <option value="income">income</option>
-        </select>
-        <button
-          className={`rounded-md px-1 py-2 mt-4 mb-3 w-11/12 mx-auto ${isDarkTheme ? "bg-slate-800 text-slate-100 " : "text-slate-800 bg-slate-100 "}`}
-          onClick={handleAddTransaction}
-        >
-          Confirm Transaction
-        </button>
-      </form>
-    </>
-  );
-}
