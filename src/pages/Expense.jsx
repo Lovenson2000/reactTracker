@@ -1,6 +1,8 @@
-import { useState, useReducer } from "react";
+
+import { useState, useEffect, useReducer } from "react";
 import { History } from "../components/History";
 import TransactionForm from "../components/TransactionForm";
+
 
 const ACTIONS = {
   TOGGLE_ADDTRANSACTION: "toggleAddTransaction",
@@ -9,12 +11,13 @@ const ACTIONS = {
   SET_AMOUNT: "setAmount",
   ADD_NEWTRANSACTION: "addNewTransaction",
   REMOVE_TRANSACTION: "removeTransaction",
-
 }
 
 //The initial values for the variables
 
-const initialState = {
+const savedState = JSON.parse(localStorage.getItem('expenseTrackerState'));
+
+const initialState = savedState || {
   addTransaction: false,
   showTransaction: true,
   transName: "",
@@ -24,8 +27,11 @@ const initialState = {
   income: 0,
   expense: 0,
   transactions: [],
-
+};
+if (savedState && savedState.transactions && savedState.transactions.length > 0) {
+  initialState.transactions = savedState.transactions;
 }
+
 
 //Implementing the reducer function
 function reducer(state, action) {
@@ -56,6 +62,11 @@ function reducer(state, action) {
 
     case ACTIONS.ADD_NEWTRANSACTION: //case for adding transaction
 
+      localStorage.setItem('expenseTrackerState', JSON.stringify({
+        ...state,
+        transactions: [...state.transactions, action.payload],
+      }));
+
       if (action.payload.type === "income") {
         return {
           ...state,
@@ -81,19 +92,20 @@ function reducer(state, action) {
       break;
 
     case ACTIONS.REMOVE_TRANSACTION: //case for removing transaction
-    
-    return {
+
+      return {
         ...state,
         transactions: state.transactions.filter((transaction) =>
           transaction.id !== action.payload.id
         ),
-          
+
         income: state.income - (action.payload.type === "income" ? action.payload.amount : 0),
-        expense: state.expense - (action.payload.type === "expense" ?  action.payload.amount: 0),
+        expense: state.expense - (action.payload.type === "expense" ? action.payload.amount : 0),
         balance: state.balance + (action.payload.type === "income" ? - action.payload.amount : action.payload.amount),
       }
 
     default:
+      localStorage.setItem('expenseTrackerState', JSON.stringify(state));
       return state;
   }
 }
@@ -123,6 +135,7 @@ function Expense({ isDarkTheme }) {
     setisNewTransaction(true);
     dispatch({ type: ACTIONS.ADD_NEWTRANSACTION, payload: newTransaction });
 
+
   }
 
   return (
@@ -143,7 +156,7 @@ function Expense({ isDarkTheme }) {
         </div>
       </div>
       {
-        isNewTransaction && state.transactions.length > 0 &&
+        state.transactions.length > 0 &&
         <div className={`${isDarkTheme ? "bg-slate-100" : "bg-slate-900"} shadow-md mx-auto rounded-md sm1:w-11/12 sm2:w-5/6`}>
           <h2 className="text-xl pt-2">Transaction History</h2>
           <ul>
