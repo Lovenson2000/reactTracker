@@ -91,18 +91,20 @@ function reducer(state, action) {
       }
       break;
 
-    case ACTIONS.REMOVE_TRANSACTION: //case for removing transaction
-
-      return {
-        ...state,
-        transactions: state.transactions.filter((transaction) =>
-          transaction.id !== action.payload.id
-        ),
-
-        income: state.income - (action.payload.type === "income" ? action.payload.amount : 0),
-        expense: state.expense - (action.payload.type === "expense" ? action.payload.amount : 0),
-        balance: state.balance + (action.payload.type === "income" ? - action.payload.amount : action.payload.amount),
-      }
+      case ACTIONS.REMOVE_TRANSACTION: 
+      
+        localStorage.setItem('expenseTrackerState', JSON.stringify({
+          ...state,
+          transactions: state.transactions.filter(transaction => transaction.id !== action.payload.id),
+        }));
+      
+        return {
+          ...state,
+          transactions: state.transactions.filter(transaction => transaction.id !== action.payload.id),
+          income: state.income - (action.payload.type === 'income' ? action.payload.amount : 0),
+          expense: state.expense - (action.payload.type === 'expense' ? action.payload.amount : 0),
+          balance: state.balance + (action.payload.type === 'income' ? -action.payload.amount : action.payload.amount),
+        };
 
     default:
       localStorage.setItem('expenseTrackerState', JSON.stringify(state));
@@ -134,7 +136,6 @@ function Expense({ isDarkTheme }) {
 
     setisNewTransaction(true);
     dispatch({ type: ACTIONS.ADD_NEWTRANSACTION, payload: newTransaction });
-
 
   }
 
