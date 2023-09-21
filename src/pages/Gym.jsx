@@ -17,7 +17,9 @@ const ACTIONS = {
 
 }
 //The initial values of the input fields
-const initialState = {
+const savedData = JSON.parse(localStorage.getItem('gymTracker'));
+
+const initialState = savedData || {
   isNewWorkout: false,
   targetMuscle: "",
   exerciceName: "",
@@ -26,6 +28,10 @@ const initialState = {
   totalReps: 0,
   workoutSessions: [],
 }
+if (savedData && savedData.transactions && savedData.workoutSessions.length > 0) {
+  initialState.workoutSessions = savedData.workoutSessions;
+}
+
 //Implementing the reducer function
 function workoutReducer(state, action) {
 
@@ -54,10 +60,22 @@ function workoutReducer(state, action) {
         numberOfReps: action.payload,
       }
     case ACTIONS.ADD_NEWWORKOUTSESSION:
+
+      localStorage.setItem('gymTracker', JSON.stringify({
+        ...state,
+        workoutSessions: [...state.workoutSessions, action.payload],
+        totalReps: 0,
+        targetMuscle: "",
+        exerciceName: "",
+        numberOfReps: "",
+        numberOfSets: "",
+        isNewWorkout: true,
+      }));
+
       return {
         ...state,
         workoutSessions: [...state.workoutSessions, action.payload],
-        totalReps: state.numberOfSets * state.numberOfReps,
+        totalReps: 0,
         targetMuscle: "",
         exerciceName: "",
         numberOfReps: "",
@@ -65,11 +83,20 @@ function workoutReducer(state, action) {
         isNewWorkout: true,
       }
     case ACTIONS.REMOVE_WORKOUTSESSION:
+      localStorage.setItem('gymTracker', JSON.stringify({
+        ...state,
+        workoutSessions: state.workoutSessions.filter((session) =>
+          session.id !== action.payload.id),
+      }));
+
       return {
         ...state,
         workoutSessions: state.workoutSessions.filter((session) =>
           session.id !== action.payload.id),
       }
+    default:
+      localStorage.setItem('gymTracker', JSON.stringify(state));
+      return state;
   }
 }
 

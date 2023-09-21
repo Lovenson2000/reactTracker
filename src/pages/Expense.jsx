@@ -1,5 +1,5 @@
 
-import { useState, useEffect, useReducer } from "react";
+import { useState, useReducer } from "react";
 import { History } from "../components/History";
 import TransactionForm from "../components/TransactionForm";
 
