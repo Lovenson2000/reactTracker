@@ -18,7 +18,7 @@ const ACTIONS = {
 }
 //The initial values of the input fields
 const savedData = JSON.parse(localStorage.getItem('gymTracker'));
-
+//Storing the state data in localStorage
 const initialState = savedData || {
   isNewWorkout: false,
   targetMuscle: "",
