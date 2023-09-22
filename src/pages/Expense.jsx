@@ -1,5 +1,5 @@
 
-import { useState, useReducer } from "react";
+import { useReducer } from "react";
 import { History } from "../components/History";
 import TransactionForm from "../components/TransactionForm";
 
@@ -113,7 +113,6 @@ function reducer(state, action) {
 }
 // eslint-disable-next-line react/prop-types
 function Expense({ isDarkTheme }) {
-  const [isNewTransaction, setisNewTransaction] = useState(false);
   const [state, dispatch] = useReducer(reducer, initialState);
 
   function handleAddTransaction(e) {
@@ -134,7 +133,6 @@ function Expense({ isDarkTheme }) {
       amount: parseFloat(state.amount),
     };
 
-    setisNewTransaction(true);
     dispatch({ type: ACTIONS.ADD_NEWTRANSACTION, payload: newTransaction });
 
   }
